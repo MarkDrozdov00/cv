@@ -17,98 +17,45 @@
 %% ----- Custom Commands -----
 % Header Block
 \newkeycommand{\resumeheader}[
-        firstname,middleinitial,lastname,
+        firstname, middleinitial, lastname,
         email,
-        phone,  % Must be in XXX-XXX-XXXX format to become a valid link
+        phone,
         linkedin,
         github,
         website,
-        city,  % Ignored if state is not also provided
+        city,
         state,
-        qrcode,  % Path to an image of a 1000x1000px QR Code
-        fixobjectivespacing  % Fixes issues with vertical spacing when using QR Code + Objective statement.
+        qrcode,
+        fixobjectivespacing
         ]{
-    \begin{flushleft}
-        \nametitle{\commandkey{firstname}}{\ifcommandkey{middleinitial}{\commandkey{middleinitial}. }{}\commandkey{lastname}}
-        {%
-            \ifcommandkey{email}{\email{\commandkey{email}}}{}%
-            \ifcommandkey{linkedin}{\contactseparator\linkedin{\commandkey{linkedin}}}{}%
-            \ifcommandkey{github}{\contactseparator\github{\commandkey{github}}\\}{}%
-            \vspace{5pt}
-            \ifcommandkey{phone}{\phone{\commandkey{phone}}}{}%
-            \ifcommandkey{state}{\contactseparator\location{\ifcommandkey{city}{\commandkey{city}, }{}\commandkey{state}}}{}%
-                {}%
-            \ifcommandkey{website}{\contactseparator\website{\commandkey{website}}}{}% Adding website next to state
-        }
-    \end{flushleft}
-    \begin{flushleft}
-        {%
-            \ifcommandkey{email}%
-                {}%
-                {%
-                    \ifcommandkey{phone}{\phone{\commandkey{phone}}}{}%
-                    \ifcommandkey{linkedin}{\contactseparator\linkedin{\commandkey{linkedin}}}{}%
-                    \ifcommandkey{github}{\contactseparator\github{\commandkey{github}}}{}%
-                    \ifcommandkey{state}{\contactseparator\location{\ifcommandkey{city}{\commandkey{city}, }{}\commandkey{state}}}{}%
-                    \ifcommandkey{website}{\contactseparator\website{\commandkey{website}}}{}% Adding website next to state
-                }%
-        }
-        % {%
-        %     \ifcommandkey{email}{\email{\commandkey{email}}\\}{}
-        %     \ifcommandkey{phone}{\phone{\commandkey{phone}}\\}{}
-        %     \ifcommandkey{linkedin}{\linkedin{\commandkey{linkedin}}\\}{}
-        %     \ifcommandkey{github}{\github{\commandkey{github}}\\}{}
-        %     \ifcommandkey{state}{\location{\ifcommandkey{city}{\commandkey{city}, }{}\commandkey{state}}\\}{}
-        % }
-        
-        % {%
-        %     \ifcommandkey{email}%
-        %         {%
-        %             \email{\commandkey{email}}%
-        %             \ifcommandkey{phone}{\contactseparator}%
-        %                 {\ifcommandkey{linkedin}{\contactseparator}\\%
-        %                     {\ifcommandkey{github}{\contactseparator}%
-        %                         {\ifcommandkey{state}{\contactseparator}{}}}}%
-        %         }%
-        %         {}%
-        %     \ifcommandkey{phone}%
-        %         {%
-        %             \phone{\commandkey{phone}}%
-        %             \ifcommandkey{linkedin}{\contactseparator}\\%
-        %                 {\ifcommandkey{github}{\contactseparator}%
-        %                     {\ifcommandkey{state}{\contactseparator}{}}}%
-        %         }%
-        %         {}%
-        %     \ifcommandkey{linkedin}%
-        %         {%
-        %             \linkedin{\commandkey{linkedin}}\\%
-        %             \ifcommandkey{github}{\contactseparator}%
-        %                 {\ifcommandkey{state}{\contactseparator}{}}%
-        %         }%
-        %         {}%
-        %     \ifcommandkey{github}%
-        %         {%
-        %             \github{\commandkey{github}}%
-        %             \ifcommandkey{state}{\contactseparator}{}%
-        %         }%
-        %         {}%
-        %     \ifcommandkey{state}%
-        %         {\location{\ifcommandkey{city}{\commandkey{city}, }{}\commandkey{state}}}%
-        %         {}%
-        % }
-    \end{flushleft}
-
-    \ifcommandkey{qrcode}{%
-        % QR Code - Generated with https://www.logodesign.net/qrcode-generator
-        \begin{tikzpicture}[remember picture,overlay]%
-            \node[anchor=north east,yshift=-.5in,xshift=-.5in]%
-                at (current page.north east)%
-                {\includegraphics[width=.1\linewidth]{\commandkey{qrcode}}};
-        \end{tikzpicture}
-        \vspace{-12pt}
-        \ifcommandkey{fixobjectivespacing}{\vspace{-10pt}}{}
-    }{}
+    \hspace{-18pt} % Adjust this value to move the text to the left
+    \begin{minipage}[t]{0.75\textwidth}
+        \vspace{-50pt} % Adjust this value to move the text up
+        \begin{flushleft}
+            \nametitle{\commandkey{firstname}}{\ifcommandkey{middleinitial}{\commandkey{middleinitial}. }{}\commandkey{lastname}}
+            {%
+                \ifcommandkey{email}{\email{\commandkey{email}}}{}%
+                \ifcommandkey{linkedin}{\contactseparator\linkedin{\commandkey{linkedin}}}{}%
+                \ifcommandkey{github}{\contactseparator\github{\commandkey{github}}\\}{}%
+                \vspace{2pt}
+                \ifcommandkey{phone}{\contactseparator\phone{\commandkey{phone}}}{}%
+                \\ % Line break before the location information
+                \ifcommandkey{state}{\location{\ifcommandkey{city}{\commandkey{city}, }{}\commandkey{state}}}{}%
+                \ifcommandkey{website}{\contactseparator\website{\commandkey{website}}}{}%
+            }
+        \end{flushleft}
+    \end{minipage}%
+    \begin{minipage}[t]{0.25\textwidth}
+        \ifcommandkey{qrcode}{%
+            \begin{flushright}
+                \hspace{40pt} % Adjust this value to move the image further to the right
+                \includegraphics[width=2cm]{\commandkey{qrcode}} % Adjust size as needed
+            \end{flushright}
+        }{}
+    \end{minipage}
 }
+
+
 \newcommand{\objective}[1]{%
     \begin{flushleft}
         #1

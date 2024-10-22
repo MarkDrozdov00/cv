@@ -117,7 +117,7 @@
 \newcommand{\phone}[1]{\faIcon{phone-alt} \href{tel:+1-#1}{#1}}
 \newcommand{\github}[1]{\faIcon{github} \href{https://github.com/#1/}{#1}}
 \newcommand{\linkedin}[1]{\faIcon{linkedin} \href{https://linkedin.com/in/#1/}{#1}}
-\newcommand{\website}[1]{\faChrome {\space}  \href{https://propovednik007.github.io/#1/}{Portfolio Website}}
+% \newcommand{\website}[1]{\faChrome {\space}  \href{https://propovednik007.github.io/#1/}{Portfolio Website}}
 \newcommand{\location}[1]{\faIcon{map-marker-alt} #1}
 % Experience/Achievements
 \newcommand{\tech}[1]{\textbf{#1}}
@@ -130,10 +130,17 @@
     \end{itemize}
 }
 \newcommand{\experience}[5]{%
-    \noindent\role{#1}{#2}\hfill\tenure{#3}{#4}\par
+    \noindent\role{#1}{#2}\hfill%
+    \ifx&#4&%
+        \singledate{#3}%
+    \else%
+        \textsc{#3} -- \textsc{#4}%
+    \fi\par
     #5
     \vspace{7pt}
 }
+
+
 
 %% ----- Four Required Configurations -----
 \renewcommand{\normalsize}{\fontsize{10pt}{12pt}\selectfont}
