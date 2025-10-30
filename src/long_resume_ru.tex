@@ -1,0 +1,212 @@
+% !TEX TS-program = xelatex
+\documentclass{ExpressiveResume}
+
+% --- Unicode + Russian (XeLaTeX) ---
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{tabularx}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+
+% --- Fonts: macOS system fonts with Cyrillic ---
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Menlo}
+\newfontfamily\cyrillicfont{Times New Roman}
+\newfontfamily\cyrillicfontsf{Arial}
+\newfontfamily\cyrillicfonttt{Menlo}
+
+% --- Remove small caps in titles/dates (Cyrillic small caps are rare) ---
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{0pt}{5pt}
+\titleformat{\subsection}{\bfseries\raggedright}{}{0em}{}
+\titlespacing{\subsection}{0pt}{3pt}{3pt}
+
+% --- Patch class macros: robust dates, no small caps ---
+\makeatletter
+\newcommand\IfEmptyTF[3]{\if\relax\detokenize{#1}\relax #2\else #3\fi}
+\renewcommand{\tenure}[2]{#1 -- #2}
+\renewcommand{\experience}[5]{%
+  \noindent\role{#1}{#2}\hfill
+  \IfEmptyTF{#4}{#3}{#3 -- #4}%
+  \par
+  #5
+  \vspace{7pt}
+}
+% Do not hardcode +1 in phone link
+\renewcommand{\phone}[1]{\faIcon{phone-alt} \href{tel:#1}{#1}}
+\makeatother
+
+\begin{document}
+
+% ----- Header -----
+\resumeheader[
+    firstname=Марк,
+    lastname=Дроздов,
+    email=markdrozdov0@gmail.com,
+    phone= +43-650-340-61-93,
+    linkedin=mark-drozdov,
+    city=Вена,
+    state=Австрия,
+    qrcode=photo.jpeg,
+    fixobjectivespacing=false
+]
+
+% ----- Education -----
+\section{Образование}
+
+\experience{Бакалавр наук}{Software and Information Engineering}{2021}{по наст. время}{
+    \noindent Венский технический университет
+}
+
+\experience{Бакалавр делового администрирования}{Hotel Management and Operations}{2018}{2022}{
+    \noindent MODUL University Vienna \newline
+    Дипломная работа: «Влияние воспринимаемой устойчивости на внедрение блокчейна в индустрии гостеприимства»
+}
+
+% ----- Work Experience -----
+\section{Опыт работы}
+
+\experience{IDCanopy}{Менеджер продукта}{Окт 2024}{по наст. время}{
+    \achievement{
+    Координировал кросс-функциональные команды для разработки и масштабирования решений по идентификации личности и eKYC для регулируемых отраслей. Руководил продуктовой документацией, онбордингом клиентов и подготовкой к выводу продукта на рынок, согласовывая действия инженеров и отдела комплаенса.
+    }
+}
+
+\experience{susteam}{Соучредитель и генеральный директор}{Сен 2022}{Янв 2025}{
+    \achievement{
+    Руководил продуктовой и бизнес-разработкой проекта 'susteam', направленного на цифровизацию и оптимизацию устойчивых и ESG-отчетов для гостиничного сектора. Отвечал за разработку, продажи и бюджетирование, участвовал в AWS First Incubator.
+    }
+}
+
+\experience{Smart Ident}{Младший операционный менеджер}{Мар 2022}{Окт 2024}{
+    \achievement{
+    Работал с клиентами из банковской и страховой сфер для интеграции решений KYC/KYB, переводил отраслевые потребности в продуктовые требования и контролировал производительность приложений.
+    }
+}
+
+\experience{Entrepreneurship Avenue}{Pitch-тренер}{Апр 2024}{Май 2024}{
+    \achievement{
+    Был приглашён в качестве ментора, чтобы помочь стартапам подготовиться к финальной презентации.
+    }
+}
+
+\experience{Reisigo}{CTO}{Июл 2022}{Окт 2022}{
+    \achievement{
+    Участвовал в AWS First Incubator в рамках проекта Reisigo, где помогал сооснователям, используя знания в сфере гостеприимства и IT. Разрабатывал пользовательский поток и UX цифрового продукта.
+    }
+}
+
+\experience{MODUL University Vienna}{Академический тьютор}{Мар 2020}{Июн 2022}{
+    \achievement{
+    Работал тьютором по курсам Accounting and Management Control I и II, Math и Statistics I \& II благодаря отличной успеваемости. Успешно обучил около 50 международных студентов.
+    }
+}
+
+\experience{LLP “Liga Holding”}{Стажёр по девелопменту недвижимости}{Май 2021}{Окт 2021}{
+    \achievement{
+    Поддерживал бизнес-переговоры с партнёрами в Турции, используя языковые навыки для организации встреч и коммуникаций.
+    }
+}
+
+% ----- Certifications -----
+\section{Сертификаты}
+
+\experience{KlimaBündnis}{Nachhaltigkeitsbericht und EU-Taxonomie-Verordnung}{Июн 2024}{}{
+    \achievement{Прошёл серию воркшопов по ESG-отчётности для компаний.}
+}
+
+\experience{Kanzian Engineering and Consulting GmbH}{Abfallbeauftragter GEM. § 11 AWG 2002}{Сен 2023}{}{
+    \achievement{Закончил университетский курс «Zertifizierung im Umweltmanagement» с акцентом на ISO14001 и EMAS II. После завершения успешно сдал экзамен на специалиста по управлению отходами в Австрии.}
+}
+
+\experience{Frankfurt School Blockchain Center}{NFT Talents}{Окт 2022}{}{
+    \achievement{Глубокое изучение NFT: их технологии, применений, преимуществ и ограничений.}
+}
+
+% ----- Skills -----
+\section{Навыки}
+
+\noindent\begin{tabularx}{\textwidth}{@{}X@{}X@{}X@{}}
+\textbf{Технические навыки}
+\begin{itemize}
+    \item Веб-разработка (HTML, CSS)
+    \item Java, JavaScript (начальный уровень)
+    \item SQL, FastAPI (начальный уровень)
+    \item RStudio
+    \item Solidity (начальный уровень)
+    \item AWS Cloud (начальный уровень)
+\end{itemize}
+&
+\textbf{Инструменты}
+\begin{itemize}
+    \item Microsoft Office
+    \item Atlassian (Jira, Confluence, Trello)
+    \item Figma
+    \item CRM (Zoho)
+    \item Document 360
+    \item Firebase, App Store Connect
+\end{itemize}
+&
+\textbf{Языки}
+\begin{itemize}
+    \item Английский (C1)
+    \item Немецкий (C1)
+    \item Русский (C2)
+    \item Французский (B1)
+\end{itemize}
+\end{tabularx}
+
+% ----- Projects and Awards -----
+\section{Проекты и награды}
+
+\experience{Победитель}{AIM Hackathon 2025 — AI Impact Mission}{Окт 2025}{}{
+    \achievement{
+    Разработал интеллектуального агента, способного отвечать на вопросы, связанные с устойчивым развитием, используя данные из Wikipedia, структурированной базы данных и ESG-отчётов в формате PDF. Реализовал пайплайн Retrieval-Augmented Generation (RAG) с функциями объяснимости для обеспечения прозрачности и точности ответов.
+    }
+    \tech{RAG, LLMs, ESG, AI Agents, Prompt Engineering}
+}
+
+\experience{2 место}{AIM Hackathon: Sustainability meets LLM}{Окт 2024}{}{
+    \achievement{Руководил разработкой масштабируемого инструмента для выявления «зелёного камуфляжа» (greenwashing) в ESG-отчётах с помощью RAG и LLM. Создал систему, автоматически выделяющую вводящие в заблуждение заявления об устойчивости и оценивающую их достоверность.}
+    \tech{Python}
+}
+
+\experience{Sustainable Impact Academy}{Impact Entrepreneur}{Дек 2023}{}{
+    \achievement{Участвовал в практических воркшопах, менторских сессиях и разработке бизнес-планов. Получил сертификат и знания по моделированию социального бизнеса, финансированию, правовым аспектам и измерению воздействия.}
+    \tech{Презентации, Командная работа}
+}
+
+\experience{2 место}{Tourism Technology Hackathon}{Ноя 2023}{}{
+    \achievement{Наша команда создала конвейер данных (data pipeline), объединяющий источники информации и формирующий граф знаний для туристической отрасли. Результат был представлен как интерактивная карта с чат-ботом, помогающим анализировать туристические данные.}
+    \tech{FastAPI, React}
+}
+
+\experience{Lip Reading App at Hackathon}{Coding Austria}{Июл 2023}{}{
+    \achievement{Использовал модель Audio-Visual Hidden Unit BERT для задачи чтения по губам для Austrian Red Cross. Интегрировал модель в веб-приложение, что позволило команде общаться в шумной среде.}
+    \tech{FastAPI, Next.js}
+}
+
+\experience{Участник симуляции G20}{Planet Needs YOUth}{Май 2023}{}{
+    \achievement{Победил в отборе на участие в G20 Simulation, организованной ISPI, где в течение трёх дней исполнял роль председателя (Индия).}
+    \tech{Переговоры, Межкультурная коммуникация, Презентации}
+}
+
+\experience{Финалист хакатона}{Loyalty Evolution der RBI}{Мар 2023}{}{
+    \achievement{Создал смарт-контракт и приложение, использующее динамические NFT как кошелёк, а метаданные — как характеристики маскота (Sumsi). Целью было привлечь новых клиентов и внедрить купоны и кэшбэк в онлайн-банкинг RBI.}
+    \tech{Next.js, Solidity}
+}
+
+\experience{3 место}{Gastro Hackathon}{Ноя 2022}{}{
+    \achievement{Наша команда создала расширение Chrome, которое переводило и суммировало сайт AMS, упрощая доступ иностранных специалистов к вакансиям.}
+    \tech{Java}
+}
+
+\experience{1 место}{Tourism Data Challenge}{Сен 2022}{}{
+    \achievement{Победил в хакатоне, организованном Österreich Werbung, с проектом NFHotel (впоследствии переросшим в susteam). Решение по привлечению туристов включало выпуск коллекционных NFT-марок в награду за выбор устойчивых направлений.}
+    \tech{Next.js, Solidity}
+}
+
+\end{document}
